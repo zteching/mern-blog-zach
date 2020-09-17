@@ -1,26 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { Container } from "react-bootstrap";
+import Article from "./components/articles/Article";
+import Articles from "./components/articles/Articles.jsx";
+import ArticleForm from "./components/articles/ArticleForm.jsx";
+import PageNavbar from "./components/navbar.js";
+import Search from "./components/Search.js";
+import Manage from "./components/articles/Manage";
+import Home from "./components/articles/Home";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <PageNavbar />
+      <Container style={{ marginTop: "100px" }}>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/articles" component={Articles} />
+          <Route exact path="/articles/new" component={ArticleForm} />
+          <Route
+            exact
+            path="/articles/:articleId/edit"
+            component={ArticleForm}
+          />
+          <Route exact path="/articles/:articleId" component={Article} />
+          <Route exact path="/search" component={Search} />
+          <Route exact path="/manage" component={Manage} />
+        </Switch>
+      </Container>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
